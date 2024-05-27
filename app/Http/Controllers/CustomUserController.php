@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CustomUser;
 use Illuminate\Http\Request;
 
+
 class CustomUserController extends Controller
 {
     /**
@@ -28,7 +29,18 @@ class CustomUserController extends Controller
      */
     public function store(Request $request)
     {
-        return 'store method';
+        //we have to do Serverside valodation
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'password'=>'required|confirmed|min:8',
+            'password_confirmation'=>'required'
+        ]);
+        //dd($request->all());
+        // store data in the db 
+        CustomUser::create($request->all());
+        // dump all the incoming data
+        return redirect("/register")->withSuccess("user registered Succesfully");
     }
 
     /**
