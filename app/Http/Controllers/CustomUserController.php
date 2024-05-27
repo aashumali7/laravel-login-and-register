@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CustomUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 
 class CustomUserController extends Controller
@@ -38,7 +39,14 @@ class CustomUserController extends Controller
         ]);
         //dd($request->all());
         // store data in the db 
-        CustomUser::create($request->all());
+        $data =$request->all(); //assciavity of the operator equal
+        var_dump($data["password"]);
+                         //Class::method
+                         //scope resolution operator
+        $data['password']= Hash::make($data['password']);
+
+        //dd($data);
+        CustomUser::create($data);
         // dump all the incoming data
         return redirect("/register")->withSuccess("user registered Succesfully");
     }
