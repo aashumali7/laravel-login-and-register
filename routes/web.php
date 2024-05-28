@@ -15,6 +15,6 @@ Route::resource('user',CustomUserController::class);
 
 Route::post('login',[AuthController::class,'login']);
 
-Route::get('/welcome',function (){
-       return view('welcome');
-});
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('welcome');

@@ -43,7 +43,7 @@ class CustomUserController extends Controller
         var_dump($data["password"]);
                          //Class::method
                          //scope resolution operator
-        $data['password']= Hash::make($data['password']);
+        $data['password']= md5($data['password']);
 
         //dd($data);
         CustomUser::create($data);
